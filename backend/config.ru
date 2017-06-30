@@ -1,4 +1,4 @@
-require "./app.rb"
+require "./app/app.rb"
 
 puts ENV["RACK_ENV"]
 

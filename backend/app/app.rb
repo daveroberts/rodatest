@@ -1,5 +1,5 @@
 require "roda"
-require './controllers/UsersController.rb'
+require './app/controllers/UsersController.rb'
 
 class App < Roda
   route do |r|
