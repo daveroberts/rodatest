@@ -8,6 +8,8 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "prebuild": "rm -rf dist/",
+    "build": "webpack && cp static/* dist/"
   }
 }

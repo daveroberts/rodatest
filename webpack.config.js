@@ -4,8 +4,8 @@ module.exports = {
     app: ["./frontend/main.js"]
   },
   output: {
-    path: path.resolve(__dirname, "build"), /* When running `webpack`, put bundle here */
-    publicPath: "/build/", /* requests that go to this path... */
+    path: path.resolve(__dirname, "dist/build"), /* When running `webpack`, put bundle here */
+    publicPath: "build", /* requests that go to this path... */
     filename: "bundle.js" /* ...and this filename will actually get the generated bundle, not a static file. */
   },
   devServer: {
