@@ -1,1 +1,1 @@
-bundle exec rerun --signal INT 'rackup config.ru'
+bundle exec rerun --background --signal INT 'rackup config.ru'

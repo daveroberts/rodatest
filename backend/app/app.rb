@@ -1,15 +1,19 @@
-require "roda"
-require './app/controllers/UsersController.rb'
+require 'sinatra'
+require 'json'
+require_relative './controllers/UsersController.rb'
 
-class App < Roda
-  plugin :json
-  route do |r|
-    response['Content-Type'] = 'application/json; charset=utf-8'
-    r.on "users" do
-      r.run UsersController
+class App < Sinatra::Application
+  before do
+    content_type 'application/json', charset: 'utf-8'
+    request.body.rewind
+    body = request.body.read
+    begin
+      @request_json = JSON.parse(body, symbolize_names: true)
+    rescue JSON::ParserError
+      # @request_json just won't be set
     end
-    r.on "hello" do
-      ["Разходка в Докторската градина и наоколо", "Bonjour"]
-    end
+  end
+  get '/hello' do
+    ["Разходка в Докторската градина и наоколо", "Bonjour"].to_json
   end
 end

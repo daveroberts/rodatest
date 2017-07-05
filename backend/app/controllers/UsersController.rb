@@ -1,30 +1,56 @@
-require "roda"
+require "sinatra"
 require 'json'
 
-class UsersController < Roda
+class App < Sinatra::Application
   users = [
     {id: 1, name: "Dave", age: 34},
     {id: 2, name: "Jen", age: 35}
   ]
 
-  plugin :json
-  route do |r|
-    response['Content-Type'] = 'application/json; charset=utf-8'
-    r.get do
-      users
+  get "/users" do
+    users.to_json
+  end
+
+  get "/users/:id" do |id|
+    if !/^\d+$/.match(id)
+      status 422
+      body "Must pass in an integer"
+      return
     end
-    r.get Integer do |id|
-      users.find{|u|u[:id]==id}
+    users.find{|u|u[:id]==id.to_i}.to_json
+  end
+
+  post "/users" do
+    if !@request_json
+      response.status = 422
+      body "Invalid JSON"
+      return
     end
-    r.post do
-      begin
-        body = r.body.read
-        user = JSON.parse(body)
-        user.id = users.length + 1
-        users.push user
-        user
-      rescue JSON::ParserError => e
-      end
+    user = @request_json
+    user[:id] = users.length + 1
+    users.push user
+    user.to_json
+  end
+
+  put "/users/:id" do |id|
+    if !/^\d+$/.match(id)
+      status 422
+      body "Must pass in an integer"
+      return
     end
+    if !@request_json
+      response.status = 422
+      body "Invalid JSON"
+      return
+    end
+    new_user = @request_json
+    user_index = users.find_index{|u|u[:id]==id.to_i}
+    if !user_index
+      status 404
+      body "user not found"
+      return
+    end
+    users[user_index] = users[user_index].merge(new_user)
+    users[user_index].to_json
   end
 end

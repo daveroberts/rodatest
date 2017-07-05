@@ -1,11 +1,12 @@
 require "./app/app.rb"
-
-puts ENV["RACK_ENV"]
+if ENV["RACK_ENV"]=='development'
+  require 'pry'
+end
 
 ::ROOT = File.dirname( File.expand_path( __FILE__ ) )
 use Rack::Static, urls: { "/"=> "index.html" }, root: "static"
 
 run Rack::URLMap.new({
   "/"=> Rack::Directory.new("static"),
-  "/api"=> App.freeze.app
+  "/api"=> App.new
 })
