@@ -19,11 +19,12 @@ class UsersController < Roda
     r.post do
       begin
         body = r.body.read
-        json = JSON.parse(body)
+        user = JSON.parse(body)
+        user.id = users.length + 1
+        users.push user
+        user
       rescue JSON::ParserError => e
-        puts e.class
       end
-      json
     end
   end
 end
