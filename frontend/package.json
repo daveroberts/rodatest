@@ -11,5 +11,8 @@
     "start": "webpack-dev-server --hot --inline",
     "prebuild": "rm -rf dist/",
     "build": "webpack && cp static/* dist/"
+  },
+  "dependencies": {
+    "vue": "^2.3.4"
   }
 }

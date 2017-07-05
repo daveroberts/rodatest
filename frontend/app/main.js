@@ -1,1 +1,8 @@
-console.log("I am inside main.js. Zerg");
+import Vue from 'vue'
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello 世界'
+  }
+})
