@@ -1,1 +1,1 @@
-cd backend && ./start
+cd backend && ./prod_start

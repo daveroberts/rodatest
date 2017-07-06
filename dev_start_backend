@@ -1,1 +1,1 @@
-cd backend && ./start_dev
+cd backend && ./dev_start

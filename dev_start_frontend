@@ -1,1 +1,1 @@
-cd frontend && ./start
+cd frontend && ./dev_start
