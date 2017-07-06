@@ -5,7 +5,7 @@ module.exports = {
     app: ["./app/main.js"]
   },
   output: {
-    path: path.resolve(__dirname, "../dist/build"), /* When running `webpack`, put bundle here */
+    path: path.resolve(__dirname, "../backend/dist/build"), /* When running `webpack`, put bundle here */
     publicPath: "build", /* requests that go to this path... */
     filename: "bundle.js" /* ...and this filename will actually get the generated bundle, not a static file. */
   },
@@ -45,4 +45,24 @@ module.exports = {
     }
   },
   devtool: '#eval-source-map'
-};
+}
+
+if (process.env.NODE_ENV === 'production'){
+  module.exports.devtool = '#source-map'
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
+}

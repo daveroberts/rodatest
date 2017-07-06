@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --hot",
-    "prebuild": "rm -rf dist/",
-    "build": "webpack && cp static/* dist/"
+    "prebuild": "rm -rf ../backend/dist/",
+    "build": "NODE_ENV=production webpack && cp -r static/* ../backend/dist/"
   },
   "dependencies": {
     "css-loader": "^0.28.4",

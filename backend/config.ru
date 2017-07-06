@@ -4,9 +4,9 @@ if ENV["RACK_ENV"]=='development'
 end
 
 ::ROOT = File.dirname( File.expand_path( __FILE__ ) )
-use Rack::Static, urls: { "/"=> "index.html" }, root: "static"
-
-run Rack::URLMap.new({
-  "/"=> Rack::Directory.new("static"),
-  "/api"=> App.new
-})
+urlmap = { "/api"=> App.new }
+if ENV["RACK_ENV"]=='production'
+  use Rack::Static, urls: { "/"=> "index.html" }, root: "dist"
+  urlmap["/"] = Rack::Directory.new("dist")
+end
+run Rack::URLMap.new(urlmap)
