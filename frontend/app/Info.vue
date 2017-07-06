@@ -1,6 +1,6 @@
 <template>
   <div>
-    New User: {{message}}
+    Info: {{message}}
   </div>
 </template>
 <script>

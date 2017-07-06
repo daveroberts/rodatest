@@ -10,11 +10,11 @@ class App < Sinatra::Application
     {id: 5, name: "عالي", age: 26}
   ]
 
-  get "/users" do
+  get "/users/?" do
     users.to_json
   end
 
-  get "/users/:id" do |id|
+  get "/users/:id/?" do |id|
     if !/^\d+$/.match(id)
       status 422
       body "Must pass in an integer"
@@ -23,7 +23,7 @@ class App < Sinatra::Application
     users.find{|u|u[:id]==id.to_i}.to_json
   end
 
-  post "/users" do
+  post "/users/?" do
     if !@request_json
       response.status = 422
       body "Invalid JSON"
@@ -32,14 +32,14 @@ class App < Sinatra::Application
     user = @request_json
     max_id = 0
     users.each do |u|
-      max_id = u.id if u[:id] > max_id
+      max_id = u[:id] if u[:id] > max_id
     end
     user[:id] = max_id + 1
     users.push user
     user.to_json
   end
 
-  put "/users/:id" do |id|
+  put "/users/:id/?" do |id|
     if !/^\d+$/.match(id)
       status 422
       body "Must pass in an integer"
@@ -61,7 +61,7 @@ class App < Sinatra::Application
     users[user_index].to_json
   end
 
-  delete "/users/:id" do |id|
+  delete "/users/:id/?" do |id|
     if !/^\d+$/.match(id)
       status 422
       body "Must pass in an integer"
