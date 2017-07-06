@@ -8,6 +8,19 @@ module.exports = {
     publicPath: "build", /* requests that go to this path... */
     filename: "bundle.js" /* ...and this filename will actually get the generated bundle, not a static file. */
   },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loaders: ['babel-loader', 'vue-loader'],
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_moudles/
+      }
+    ]
+  },
   devServer: {
     /* Warning, adding hot and inline here, instead of on the command line, doesn't work.  (Console will say HMR is disabled.) */
     /*inline: true, /* auto reload */
