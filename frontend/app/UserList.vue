@@ -14,7 +14,7 @@
           <tr v-for="user in users">
             <td>{{user.name}}</td>
             <td>{{user.age}}</td>
-            <td><button v-on:click.prevent="remove(user)">Remove</button></td>
+            <td><button v-on:click.prevent="remove(user)"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button></td>
           </tr>
         </tbody>
       </table>

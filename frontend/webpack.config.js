@@ -1,4 +1,5 @@
-var path = require("path");
+var path = require("path")
+const webpack = require('webpack')
 module.exports = {
   entry: {
     app: ["./app/main.js"]
@@ -21,11 +22,20 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
+  plugins: [
+    new webpack.NamedModulesPlugin(), /* displays the name of what was updated in HMR */
+  ],
   devServer: {
     /* Warning, adding hot and inline here, instead of on the command line, doesn't work.  (Console will say HMR is disabled.) */
     /*inline: true, /* auto reload */
     /*hot: true, /* hot module replacement */
     quiet: true, /* less webpack output */
+    noInfo: true, /* webpack bundle information on startup and save is hidden, errors and warnings still shown */
     contentBase: "./static", /* Dev server will serve files from this dir */
     proxy: {
       '/api': {
@@ -33,5 +43,6 @@ module.exports = {
         secure: false
       }
     }
-  }
+  },
+  devtool: '#eval-source-map'
 };

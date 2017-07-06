@@ -13,7 +13,7 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "webpack-dev-server --open --hot",
     "prebuild": "rm -rf dist/",
     "build": "webpack && cp static/* dist/"
   },
