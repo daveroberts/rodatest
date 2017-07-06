@@ -4,7 +4,10 @@ require 'json'
 class App < Sinatra::Application
   users = [
     {id: 1, name: "Dave", age: 34},
-    {id: 2, name: "Jen", age: 35}
+    {id: 2, name: "Jen", age: 35},
+    {id: 3, name: "美菜", age: 18},
+    {id: 4, name: "하준", age: 24},
+    {id: 5, name: "عالي", age: 26}
   ]
 
   get "/users" do
@@ -27,7 +30,11 @@ class App < Sinatra::Application
       return
     end
     user = @request_json
-    user[:id] = users.length + 1
+    max_id = 0
+    users.each do |u|
+      max_id = u.id if u[:id] > max_id
+    end
+    user[:id] = max_id + 1
     users.push user
     user.to_json
   end
@@ -52,5 +59,21 @@ class App < Sinatra::Application
     end
     users[user_index] = users[user_index].merge(new_user)
     users[user_index].to_json
+  end
+
+  delete "/users/:id" do |id|
+    if !/^\d+$/.match(id)
+      status 422
+      body "Must pass in an integer"
+      return
+    end
+    user_index = users.find_index{|u|u[:id]==id.to_i}
+    if !user_index
+      status 404
+      body "user not found"
+      return
+    end
+    users.delete_at(user_index)
+    body ""
   end
 end
