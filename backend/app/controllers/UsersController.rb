@@ -2,6 +2,11 @@ require "sinatra"
 require 'json'
 
 class App < Sinatra::Application
+
+  before '/users/?*' do
+    halt 401, {'Content-Type'=> 'text/plain'}, "Unauthorized" if !session[:user]
+  end
+
   users = [
     {id: 1, name: "Dave", age: 34},
     {id: 2, name: "Jen", age: 35},
