@@ -3,6 +3,8 @@ if ENV["RACK_ENV"]=='development'
   require 'pry'
 end
 
+use Rack::Deflater
+
 ::ROOT = File.dirname( File.expand_path( __FILE__ ) )
 urlmap = { "/api"=> App.new }
 if ENV["RACK_ENV"]=='production'
