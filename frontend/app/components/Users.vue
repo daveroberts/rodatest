@@ -2,7 +2,7 @@
   <div>
     <h1>Users</h1>
     <div v-if="users">
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -14,7 +14,7 @@
           <tr v-for="user in users">
             <td>{{user.name}}</td>
             <td>{{user.age}}</td>
-            <td><a class="btn" href="#" v-on:click.prevent="remove(user)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            <td><a class="btn btn-icon" href="#" v-on:click.prevent="remove(user)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
           </tr>
         </tbody>
       </table>
@@ -84,9 +84,5 @@ export default {
 }
 </script>
 <style>
-.btn{ background-color: #3371d6; color: white; padding: 5px; border-radius: 3px; font-size: 18px; -webkit-appearance: none; -moz-appearance: none; border: none; }
-.btn[type=submit]:focus{ outline: none; }
-.btn[type=submit]::-moz-focus-inner{ border: 0; }
-.btn[type=submit]:hover{ cursor: pointer; }
-tbody tr{ line-height: 30px; }
+tbody tr{ line-height: 2em; }
 </style>

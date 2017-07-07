@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div id="links">
-      <router-link v-if="auth.get()" to="/users" exact>User List</router-link>
-      <router-link v-if="!auth.get()" to="/login" exact>Login</router-link>
-      <router-link to="/info" exact>Info</router-link>
-      <a style="float: right" href="#" v-on:click="logout()" v-if="auth.get()">Logout</a>
-      <span style="float: right" v-if="auth.get()">{{ auth.get().username }} </span>
+    <div class="nav-bar">
+      <router-link class="nav-item" v-if="auth.get()" to="/users" exact>User List</router-link><router-link class="nav-item" v-if="!auth.get()" to="/login" exact>Login</router-link><router-link class="nav-item" to="/info" exact>Info</router-link><a class="nav-item nav-item-right" href="#" v-on:click="logout()" v-if="auth.get()">Logout</a><span class="nav-item nav-item-right" v-if="auth.get()">{{ auth.get().username }}</span>
     </div>
     <router-view></router-view>
   </div>

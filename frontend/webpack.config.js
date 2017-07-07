@@ -19,6 +19,21 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_moudles/
+      },
+      {
+        test: /\.(png|jpg|gif|svg|woff2|woff|ttf|eot)$/,
+        loader: 'url-loader?limit=10000', /* if resource less then 10kb, load inline, otherwise use file-loader */
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.less$/,
+        loaders: ['style-loader', 'css-loader', 'less-loader']
       }
     ]
   },

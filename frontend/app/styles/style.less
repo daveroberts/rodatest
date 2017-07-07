@@ -1,0 +1,35 @@
+@cerulean: #4484ce;
+@aluminium: #d9d9d9;
+@light: #f9cf00;
+@tangerine: #f19f4d;
+
+@background: @cerulean;
+@color: white;
+@normal-color: #333;
+@light-background: @aluminium;
+@bright: @light;
+@highlight: @tangerine;
+
+body{ color: @normal-color; font-family: sans; font-size: 1.1em; }
+a:visited{ color: darken(@background, 10%) }
+h1{ font-size: 2em; }
+
+.nav-bar{ background-color: @background; color: @color; line-height: 2em; margin-bottom: 1em; }
+.nav-item{ color: @color !important; text-decoration: none; display: inline-block; padding: 0 1em; border-right: 0.15em solid white; }
+.nav-item:focus{ outline: none; }
+a.nav-item:hover{ background-color: darken(@background, 10%); }
+.nav-item-right{ float: right; border-right: none; border-left: 0.15em solid white; }
+
+.btn{ color: @background !important; padding: 0.15em; border-radius: 0.3em; font-size: 1.1em; -webkit-appearance: none; -moz-appearance: none; border: 0.1em solid @background; }
+.btn:hover{ background-color: @background; color: @color !important; }
+.btn[type=submit]:focus{ outline: none; }
+.btn[type=submit]::-moz-focus-inner{ border: 0; }
+.btn[type=submit]:hover{ cursor: pointer; }
+.btn-icon{ display: inline-block; width: 1.1em; height: 1.1em; text-align: center; line-height: 1.1em; }
+
+.table{ border: 0.3em solid @light-background; }
+.table > thead { background-color: @light-background; font-size: 1.2em; }
+.table th { padding: 0.5em; text-align: left; }
+.table td { padding: 0.5em; }
+.table > tbody > tr { border-bottom: 0.15em solid #ccc; }
+.table > tbody > tr:hover { background-color: lighten(@background, 40%); }
