@@ -10,11 +10,13 @@
 @bright: @light;
 @highlight: @tangerine;
 
-body{ color: @normal-color; font-family: sans; font-size: 1.1em; }
+body{ color: @normal-color; font-family: sans; font-size: 1em; }
 a:visited{ color: darken(@background, 10%) }
-h1{ font-size: 2em; }
+h1{ font-size: 1.8em; color: darken(@background, 20%); margin-top: 0.5em; margin-bottom: 0.5em; }
+h2{ font-size: 1.4em; color: darken(@background, 20%); margin-top: 1em; margin-bottom: 0.5em;}
+input{ border: 1px solid #999; height: 1.7em; min-width: 30em; }
 
-.nav-bar{ background-color: @background; color: @color; line-height: 2em; margin-bottom: 1em; }
+.nav-bar{ background-color: @background; color: @color; line-height: 2em; margin-bottom: 0.5em; }
 .nav-item{ color: @color !important; text-decoration: none; display: inline-block; padding: 0 1em; border-right: 0.15em solid white; }
 .nav-item:focus{ outline: none; }
 a.nav-item:hover{ background-color: darken(@background, 10%); }
@@ -27,9 +29,12 @@ a.nav-item:hover{ background-color: darken(@background, 10%); }
 .btn[type=submit]:hover{ cursor: pointer; }
 .btn-icon{ display: inline-block; width: 1.1em; height: 1.1em; text-align: center; line-height: 1.1em; }
 
-.table{ border: 0.3em solid @light-background; }
-.table > thead { background-color: @light-background; font-size: 1.2em; }
-.table th { padding: 0.5em; text-align: left; }
-.table td { padding: 0.5em; }
-.table > tbody > tr { border-bottom: 0.15em solid #ccc; }
+.form > table > tbody > tr > th { padding: 0.4em; text-align: right; }
+.form > table > tbody > tr > th > label { font-size: 1.1em; }
+
+.table{ border: 0.3em solid @background; }
+.table > thead { background-color: @background; color: @color; font-size: 1.1em; }
+.table th { padding: 0.4em; text-align: left; }
+.table td { padding: 0.1em; }
+.table > tbody > tr { border-bottom: 0.10em solid #ccc; }
 .table > tbody > tr:hover { background-color: lighten(@background, 40%); }

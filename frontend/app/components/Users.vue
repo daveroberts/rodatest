@@ -20,12 +20,13 @@
       </table>
     </div>
     <div>
-      <form v-on:submit.prevent="create_user">
+      <h2>Add a new user</h2>
+      <form v-on:submit.prevent="create_user" class="form">
         <table>
           <tbody>
             <tr>
               <th><label for="username">Username</label></th>
-              <td><input type="text" id="username" v-model="new_user.name" /></td>
+              <td><input type="text" ref="username" id="username" v-model="new_user.name" /></td>
             </tr>
             <tr>
               <th><label for="age">Age</label></th>
@@ -76,6 +77,7 @@ export default {
         var user = res.data
         self.$store.commit('addUser', user)
         self.new_user = {name: '', age: ''}
+        self.$refs.username.focus()
       }).catch(function(err){
         console.log(err)
       })

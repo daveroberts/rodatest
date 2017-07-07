@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="nav-bar">
-      <router-link class="nav-item" v-if="current_user" to="/users" exact>User List</router-link><router-link class="nav-item" v-if="!current_user" to="/login" exact>Login</router-link><router-link class="nav-item" to="/info" exact>Info</router-link><a class="nav-item nav-item-right" href="#" v-on:click="logout()" v-if="current_user">Logout</a><span class="nav-item nav-item-right" v-if="current_user">{{ current_user.username }}</span>
+      <router-link class="nav-item" v-if="current_user" to="/users" exact>User List</router-link><router-link class="nav-item" v-if="!current_user" to="/login" exact>Login</router-link><router-link class="nav-item" to="/info" exact>Info</router-link><a class="nav-item nav-item-right" href="#/login" v-on:click="logout()" v-if="current_user">Logout</a><span class="nav-item nav-item-right" v-if="current_user">{{ current_user.username }}</span>
     </div>
-    <router-view></router-view>
+    <div style="padding: 1em;">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
