@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav-bar">
-      <router-link class="nav-item" v-if="auth.get()" to="/users" exact>User List</router-link><router-link class="nav-item" v-if="!auth.get()" to="/login" exact>Login</router-link><router-link class="nav-item" to="/info" exact>Info</router-link><a class="nav-item nav-item-right" href="#" v-on:click="logout()" v-if="auth.get()">Logout</a><span class="nav-item nav-item-right" v-if="auth.get()">{{ auth.get().username }}</span>
+      <router-link class="nav-item" v-if="current_user" to="/users" exact>User List</router-link><router-link class="nav-item" v-if="!current_user" to="/login" exact>Login</router-link><router-link class="nav-item" to="/info" exact>Info</router-link><a class="nav-item nav-item-right" href="#" v-on:click="logout()" v-if="current_user">Logout</a><span class="nav-item nav-item-right" v-if="current_user">{{ current_user.username }}</span>
     </div>
     <router-view></router-view>
   </div>
@@ -9,11 +9,18 @@
 <script>
 import auth from '../services/AuthService.js'
 export default {
+  computed: {
+    current_user(){ return this.$store.state.current_user }
+  },
   created: function(){
+    auth.check().then((res)=>{
+      console.log("Resolved")
+    }).catch((err)=>{
+      console.log("Error")
+    })
   },
   data: function(){
     return {
-      auth: auth
     }
   },
   methods: {

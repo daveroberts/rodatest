@@ -1,25 +1,25 @@
 import axios from 'axios'
+import store from '../store'
 
 class AuthService {
-  get(){ return this.user }
-  set(user){ this.user = user }
   login(user){
     return axios.post('/api/session', user).then((res)=>{
       const user = res.data
-      this.set(user)
+      store.commit('login', user)
       return user
     })
   }
-  check(){
-    return axios.get('/api/session').then((res)=>{
+  check(user){
+    if (store.state.current_user){ return }
+    return axios.get('/api/session', user).then((res)=>{
       const user = res.data
-      this.set(user)
+      store.commit('login', user)
       return user
     })
   }
   logout(){
     return axios.delete('/api/session').then((res)=>{
-      this.set(null)
+      store.commit('logout')
       return
     }).catch((err)=>{
       console.log(err)

@@ -5,7 +5,7 @@ source 'https://rubygems.org' do
     gem 'puma' # production web server
   end
   group :development do
-    gem 'rerun' # Used in development to restart app server when files change
-    gem 'pry' # Used in development to set a backend breakpoint
+    gem 'rerun' # Restart app server when files change
+    gem 'pry' # Set breakpoints in Ruby code; Ruby console
   end
 end

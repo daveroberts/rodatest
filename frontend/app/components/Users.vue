@@ -44,17 +44,20 @@
 <script>
 import axios from 'axios'
 export default {
+  computed: {
+    users(){ return this.$store.state.users }
+  },
   created: function(){
     var self = this
+    if (self.$store.state.users){ return }
     axios.get('/api/users').then(function(res){
-      self.users = res.data
+      self.$store.commit('setUsers', res.data)
     }).catch(function(err){
       console.log(err)
     })
   },
   data: function(){
     return {
-      users: null,
       new_user: {name: '', age: ''}
     }
   },
@@ -62,10 +65,7 @@ export default {
     "remove": function(user){
       var self = this
       axios.delete(`/api/users/${user.id}`).then(function(res){
-        var idx = self.users.findIndex((u)=>u.id==user.id)
-        if (idx > -1){
-          self.users.splice(idx,1)
-        }
+        self.$store.commit('removeUser', user.id)
       }).catch(function(err){
         console.log(err)
       })
@@ -74,7 +74,7 @@ export default {
       var self = this
       axios.post(`/api/users`, self.new_user).then(function(res){
         var user = res.data
-        self.users.push(user)
+        self.$store.commit('addUser', user)
         self.new_user = {name: '', age: ''}
       }).catch(function(err){
         console.log(err)
